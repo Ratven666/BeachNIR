@@ -1,4 +1,19 @@
 % Содержание
+\begin{center}
+  \textbf{СОДЕРЖАНИЕ}
+\end{center}
+\makeatletter
+\renewcommand{\tableofcontents}{%
+  \begingroup
+    \parindent=0pt
+    \parskip=0pt
+    % НИКАКОГО \section*{\contentsname}
+    \@starttoc{toc}%
+  \endgroup
+}
+\makeatother
+
+
 \tableofcontents
 
 \newpage

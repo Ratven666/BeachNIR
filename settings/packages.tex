@@ -2,6 +2,9 @@
 \usepackage{fontspec}
 \usepackage{polyglossia}
 
+\usepackage[hyphens]{url} % улучшенные переносы в URL
+\usepackage{xurl}         % разрешить перенос почти в любом месте ссылки
+
 % рабочие ссылки в документе
 \usepackage{hyperref}
 
@@ -23,7 +26,6 @@
 \let\theHFancyVerbLine\theFancyVerbLine
 \def\theFancyVerbLine{\rmfamily\tiny\emptyaccsupp{\arabic{FancyVerbLine}}}
 
-% библиография
 \usepackage[
     backend=biber,
     style=gost-numeric,
@@ -32,6 +34,22 @@
     language=auto,
     bibencoding=utf8
 ]{biblatex}
+
+\renewcommand{\bibfont}{\normalfont\rmfamily\upshape}
+
+% названия, DOI, URL без курсива — это уже работает
+\DeclareFieldFormat{title}{\textup{#1}}
+\DeclareFieldFormat{booktitle}{\textup{#1}}
+\DeclareFieldFormat{maintitle}{\textup{#1}}
+\DeclareFieldFormat{journaltitle}{\textup{#1}}
+\DeclareFieldFormat{issuetitle}{\textup{#1}}
+\DeclareFieldFormat{doi}{\textup{DOI:\space #1}}
+\DeclareFieldFormat{url}{\textup{#1}}
+
+% Фикс: снять курсив со всех участков, которые biblatex-gost помечает как 'emph'
+\protected\def\mkbibemph#1{\textup{#1}}
+% убрать курсив «шапки» записи (авторы и пр.) в biblatex-gost
+\renewcommand*{\mkgostheading}[1]{#1}
 
 % установка полей
 \usepackage{geometry}
