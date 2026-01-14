@@ -1,4 +1,4 @@
-% Содержание
+% % Содержание
 \begin{center}
   \textbf{СОДЕРЖАНИЕ}
 \end{center}
@@ -11,10 +11,15 @@
     \@starttoc{toc}%
   \endgroup
 }
-\makeatother
+% \makeatother
 
+% \pagestyle{empty}
 
+% \clearpage
+\setcounter{page}{1}   % страница с оглавлением = 1
+\pagestyle{plain}      % включить вывод номера
 \tableofcontents
+\clearpage
 
+% \tableofcontents
 \newpage
-

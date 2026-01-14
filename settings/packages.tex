@@ -64,7 +64,30 @@
 % для заголовков
 \usepackage{caption}
 \usepackage{titlesec}
-\usepackage[dotinlabels]{titletoc}
+% \usepackage[dotinlabels]{titletoc}
+\usepackage{titletoc} 
+
+\titlecontents{section}
+  [0pt]                          % нет отступа для section
+  {\normalsize}
+  {\thecontentslabel\quad}
+  {}
+  {\titlerule*[.5pc]{.}\contentspage}
+
+\titlecontents{subsection}
+  [1.5em]                        % отступ для subsection
+  {\normalsize}
+  {\thecontentslabel\quad}
+  {}
+  {\titlerule*[.5pc]{.}\contentspage}
+
+\titlecontents{subsubsection}
+  [3.8em]                        % больший отступ для subsubsection
+  {\normalsize}
+  {\thecontentslabel\quad}
+  {}
+  {\titlerule*[.5pc]{.}\contentspage}
+
 
 % разное для математики
 \usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}

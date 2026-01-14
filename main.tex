@@ -81,6 +81,12 @@
 
 \sloppy
 
+% Формат номеров разделов без завершающей точки
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+
 \usepackage{caption}
 
 \makeatletter
@@ -94,21 +100,19 @@
   labelsep=space
 }
 
-\addto\captionsrussian{%
-  \renewcommand{\contentsname}{\MakeUppercase{Содержание}}%
-}
 
 \begin{document}
 
-% Не редактируем: Титульная страница (формируется автоматически из заданной конфигурации)
+% титульник
 \include{templates/titlepage}
 
-% Не редактируем: Страница содержания (формируется автоматически из section, subsection и пр., указанных в content.tex)
+% страница содержания = страница 1
+\setcounter{page}{1}
+\pagestyle{plain}
 \include{templates/tocpage}
 
-% Редактируем: всё остальное: вступление, др. этапы, заключение, приложение
+% дальше основной текст
 \input{content}
 
-% Не редактируем: Страница библиографии (формируется автоматически из книжек, указанных в refs.bib и пометок \cite{имя_источника} в тексте)
 \include{templates/bibpage}
 \end{document}
