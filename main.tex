@@ -64,6 +64,7 @@
   {\bfseries\fontsize{14pt}{14pt}\selectfont}
   {\thesubsubsection}{1em}{}
 
+
 \usepackage[autostyle]{csquotes}
 % \MakeOuterQuote{"} % опционально: чтобы "текст" → «текст»
 \usepackage[russian,english]{babel}
@@ -89,17 +90,18 @@
 
 \usepackage{caption}
 
+\captionsetup[table]{%
+  name={Таблица},          % слово перед номером
+  labelsep=space,          % разделитель: пробел (без точки и двоеточия)
+  justification=raggedright, % выравнивание по левому полю
+  singlelinecheck=false,   % не центрировать однострочные подписи
+  font=normalsize,         % обычный шрифт (без \bfseries)
+  labelfont=normalsize     % номер/имя таблицы тоже не жирным
+}
+
 \makeatletter
 \renewcommand{\fnum@figure}{Рисунок~\thefigure} % без точки
 \makeatother
-
-\captionsetup[figure]{%
-  format=plain,
-  justification=centering,
-  singlelinecheck=false,
-  labelsep=space
-}
-
 
 \begin{document}
 

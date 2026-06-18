@@ -3,24 +3,43 @@
 \setotherlanguage{english}
 
 % локализация
-\addto\captionsrussian{
-	\renewcommand{\figurename}{Рисунок}%
-	\renewcommand{\partname}{Глава}
-	\renewcommand{\contentsname}{\centerline{Содержание}}
-	\renewcommand{\listingscaption}{Листинг}
+\addto\captionsrussian{%
+  \renewcommand{\figurename}{Рисунок}%
+  \renewcommand{\partname}{Глава}%
+  \renewcommand{\contentsname}{\centerline{Содержание}}%
+  \renewcommand{\listingscaption}{Листинг}%
 }
 
-% основной шрифт документа
+% основной шрифт документа (Times New Roman)
 % \setmainfont{CMU Serif}
 % \newfontfamily\cyrillicfont{CMU Serif}[Script=Cyrillic]
-% Шрифт Times New Roman
 \setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
-\defaultfontfeatures{Ligatures={TeX},Renderer=Basic} 
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}
+
+% URL тем же шрифтом, что и основной текст
+\renewcommand{\UrlFont}{\normalfont}
+
+% аккуратные переносы внутри URL
+\def\UrlBreaks{%
+  \do\/\do-\do_\do.\do?\do&\do=\do:\do\%\do\#%
+}
+
+% оформление полей библиографии (biblatex-gost)
+% всё — обычным шрифтом Times New Roman
+\DeclareFieldFormat*{doi}{\textnormal{#1}}
+\DeclareFieldFormat*{eprint}{\textnormal{#1}}
+\DeclareFieldFormat*{title}{\textnormal{#1}}
+\DeclareFieldFormat*{journaltitle}{\textnormal{#1}}
+\DeclareFieldFormat*{booktitle}{\textnormal{#1}}
+\DeclareFieldFormat*{note}{\textnormal{#1}}
+
+% URL — через \url, чтобы работали \UrlBreaks
+\DeclareFieldFormat{url}{\url{#1}}
 
 % перечень использованных источников
 \addbibresource{refs.bib}
 
-% настройка полей
+% настройка полей страницы
 \geometry{top=2cm}
 \geometry{bottom=2cm}
 \geometry{left=3cm}
@@ -28,43 +47,65 @@
 \geometry{bindingoffset=0cm}
 
 % настройка ссылок и метаданных документа
-% \hypersetup{unicode=true,colorlinks=true,linkcolor=red,citecolor=green,filecolor=magenta,urlcolor=cyan}
-\hypersetup{unicode=true,colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+\hypersetup{%
+  unicode=true,
+  colorlinks=true,
+  breaklinks=true,
+  linkcolor=black,
+  citecolor=black,
+  filecolor=black,
+  urlcolor=black
+}
 
 % настройка подсветки кода и окружения для листингов
 \usemintedstyle{colorful}
 \newenvironment{code}{\captionsetup{type=listing}}{}
 
 % шрифт для листингов с лигатурами
-\setmonofont{FiraCode-Regular.otf}[
-	SizeFeatures={Size=10},
-	Path = templates/,
-	Contextuals=Alternate
+\setmonofont{FiraCode-Regular.otf}[%
+  SizeFeatures={Size=10},%
+  Path=templates/,%
+  Contextuals=Alternate%
 ]
 
-% оформления подписи рисунка
-\captionsetup[figure]{labelsep = period}
+% подписи рисунков
+\captionsetup[figure]{%
+  labelsep=space,%
+  justification=centering,%
+  singlelinecheck=false%
+}
 
-% подпись таблицы
+% подписи таблиц
 \DeclareCaptionFormat{hfillstart}{\hfill#1#2#3\par}
-\captionsetup[table]{format=hfillstart,labelsep=newline,justification=centering,skip=-10pt,textfont=bf}
+% \captionsetup[table]{format=hfillstart,labelsep=newline,justification=centering,skip=-10pt,textfont=bf}
+\captionsetup[table]{%
+  name={Таблица},%
+  labelsep=space,%
+  justification=raggedright,%
+  singlelinecheck=false,%
+  font=normalfont,%
+  labelfont=normalfont,%
+  skip=6pt%
+}
 
 % путь к каталогу с рисунками
 \graphicspath{{fig/}}
 
-% Внесение titlepage в учёт счётчика страниц
+% учёт титульного листа
 \makeatletter
-\renewenvironment{titlepage} {
-	\thispagestyle{empty}
-}
+\renewenvironment{titlepage}{%
+  \thispagestyle{empty}%
+}{}
 \makeatother
 
+% нумерация рисунков и таблиц по разделам
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
 
+% формат заголовков \title
 \titlelabel{\thetitle.\quad}
 
-% для удобного конспектирования математики
+% математика
 \mathtoolsset{showonlyrefs=true}
 \theoremstyle{plain}
 \newtheorem{theorem}{Теорема}[section]
@@ -82,8 +123,10 @@
 \DeclareMathOperator{\sgn}{\mathop{sgn}}
 
 % перенос знаков в формулах (по Львовскому)
-\newcommand*{\hm}[1]{#1\nobreak\discretionary{} {\hbox{$\mathsurround=0pt #1$}}{}}
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$\mathsurround=0pt #1$}}{}}
 
 % настройки эпиграфов
 \setlength{\epigraphwidth}{0.5\textwidth}
 \setlength{\epigraphrule}{0pt}
+
+
